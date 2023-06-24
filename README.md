@@ -1,6 +1,6 @@
-# Phi
+# CleanPhi
 
-Phi is a powerful Python framework designed to enhance text processing by effectively removing unwanted elements such as extraneous characters and unicodes. Leveraging the capabilities of natural language processing, Phi provides a comprehensive set of functionalities, making it an invaluable tool for text cleaning and related tasks.
+CleanPhi is a powerful Python framework designed to enhance text processing by effectively removing unwanted elements such as extraneous characters and unicodes. Leveraging the capabilities of natural language processing, CleanPhi provides a comprehensive set of functionalities, making it an invaluable tool for text cleaning and related tasks.
 
 ```python
 from cleantext import clean
@@ -31,24 +31,24 @@ clean("some input",
 Choose an arguement and use the **clean** function in your code:
 
 ```python
-import phi
+import CleanPhi
 text = "Hello, world!  Hello...\t \tworld?\n\nHello:\r\n\n\nWorld. "
 proc_text = "Hello, world! Hello... world?\nHello:\nWorld."
-assert phi.normalize_whitespace(text, no_line_breaks=False) == proc_text
-assert phi.normalize_whitespace(" dd\nd  ", no_line_breaks=True) == "dd d"
+assert CleanPhi.normalize_whitespace(text, no_line_breaks=False) == proc_text
+assert CleanPhi.normalize_whitespace(" dd\nd  ", no_line_breaks=True) == "dd d"
 ```
 
-### To install Phi in >=Python3.6
+### To install CleanPhi in >=Python3.6
 
 ```powershell
-pip install phi
+pip install CleanPhi
 ```
 
-### Use Phi with Scikit
+### Use CleanPhi with Scikit
 
 ```python
-from phi.scikit import PhiTransformer
+from CleanPhi.scikit import CleanPhiTransformer
 
-cleaner = PhiTransformerr(no_punct=False, lower=False)
+cleaner = CleanPhiTransformerr(no_punct=False, lower=False)
 cleaner.transform(['Clean text.', 'Natural language processing!'])
 ```
