@@ -47,8 +47,8 @@ pip install CleanPhi
 ### Use CleanPhi with Scikit
 
 ```python
-from CleanPhi.scikit import CleanPhiTransformer
+from CleanPhi.scikit import PhiTransformer
 
-cleaner = CleanPhiTransformerr(no_punct=False, lower=False)
+cleaner = PhiTransformer(no_punct=False, lower=False)
 cleaner.transform(['Clean text.', 'Natural language processing!'])
 ```
