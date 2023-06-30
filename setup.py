@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="phi",
-    version="1.0.0",
+    name="cleanphi",
+    version="0.2.0",
     author="Arya Praneil Pritesh",
     author_email="aryapraneil@gmail.com",
     description="Natural language processing framework to clean sentences and texts.",

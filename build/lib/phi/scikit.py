@@ -9,21 +9,21 @@ from .main import clean
 class PhiTransformer(TransformerMixin, BaseEstimator):
     def __init__(
         self,
-        fix_unicode=True,
+        unicode=True,
         to_ascii=True,
-        lower=True,
-        normalize_whitespace=True,
+        to_lower=True,
+        remove_whitespace=True,
         no_line_breaks=False,
         strip_lines=True,
         keep_two_line_breaks=False,
-        no_urls=False,
-        no_emails=False,
-        no_phone_numbers=False,
-        no_numbers=False,
-        no_digits=False,
-        no_currency_symbols=False,
-        no_punct=False,
-        no_emoji=False,
+        remove_url=False,
+        remove_email=False,
+        remove_ph=False,
+        remove_nums=False,
+        remove_digits=False,
+        remove_currency=False,
+        remove_punct=False,
+        remove_emoji=False,
         replace_with_url="<URL>",
         replace_with_email="<EMAIL>",
         replace_with_phone_number="<PHONE>",
@@ -33,21 +33,21 @@ class PhiTransformer(TransformerMixin, BaseEstimator):
         replace_with_punct="",
         lang="en",
     ):
-        self.fix_unicode = fix_unicode
+        self.unicode = unicode
         self.to_ascii = to_ascii
-        self.lower = lower
-        self.normalize_whitespace = normalize_whitespace
+        self.to_lower = to_lower
+        self.remove_whitespace = remove_whitespace
         self.no_line_breaks = no_line_breaks
         self.strip_lines = strip_lines
         self.keep_two_line_breaks = keep_two_line_breaks
-        self.no_urls = no_urls
-        self.no_emails = no_emails
-        self.no_phone_numbers = no_phone_numbers
-        self.no_numbers = no_numbers
-        self.no_digits = no_digits
-        self.no_currency_symbols = no_currency_symbols
-        self.no_punct = no_punct
-        self.no_emoji = no_emoji
+        self.remove_url = remove_url
+        self.remove_email = remove_email
+        self.remove_ph = remove_ph
+        self.remove_nums = remove_nums
+        self.remove_digits = remove_digits
+        self.remove_currency = remove_currency
+        self.remove_punct = remove_punct
+        self.remove_emoji = remove_emoji
         self.replace_with_url = replace_with_url
         self.replace_with_email = replace_with_email
         self.replace_with_phone_number = replace_with_phone_number

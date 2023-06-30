@@ -19,10 +19,6 @@ except ImportError:
     from unicodedata import normalize
 
     unidecode = lambda x: normalize("NFD", x).encode("ASCII", "ignore").decode("utf-8")
-    log.warning(
-        "Since the GPL-licensed package `unidecode` is not installed, using Python's `unicodedata` package which yields worse results."
-    )
-
 
 def fix_strange_quotes(text):
     text = constants.SINGLE_QUOTE_REGEX.sub("'", text)
@@ -39,13 +35,13 @@ def fix_bad_unicode(text, normalization="NFC"):
     return fix_text(text, normalization=normalization)
 
 
-def to_ascii_unicode(text, lang="en", no_emoji=False):
+def to_ascii_unicode(text, lang="en", remove_emoji=False):
     text = fix_strange_quotes(text)
 
-    if not no_emoji:
+    if not remove_emoji:
         text = demojize(text, use_aliases=True)
 
-    lang = lang.lower()
+    lang = lang.to_lower()
     if lang == "de":
         text = save_replace(text, lang=lang)
 
@@ -54,13 +50,13 @@ def to_ascii_unicode(text, lang="en", no_emoji=False):
     if lang == "de":
         text = save_replace(text, lang=lang, back=True)
 
-    if not no_emoji:
+    if not remove_emoji:
         text = emojize(text, use_aliases=True)
 
     return text
 
 
-def normalize_whitespace(
+def remove_whitespace(
     text, no_line_breaks=False, strip_lines=True, keep_two_line_breaks=False
 ):
 
@@ -81,8 +77,8 @@ def normalize_whitespace(
 
     return text.strip()
 
-def _normalize_whitespace(*kwargs):
-    return normalize_whitespace(*kwargs)
+def _remove_whitespace(*kwargs):
+    return remove_whitespace(*kwargs)
 
 
 def replace_urls(text, replace_with="<URL>"):
@@ -133,21 +129,21 @@ def remove_emoji(text):
 
 def clean(
     text,
-    fix_unicode=True,
+    unicode=True,
     to_ascii=True,
-    lower=True,
-    normalize_whitespace=True,
+    to_lower=True,
+    remove_whitespace=True,
     no_line_breaks=False,
     strip_lines=True,
     keep_two_line_breaks=False,
-    no_urls=False,
-    no_emails=False,
-    no_phone_numbers=False,
-    no_numbers=False,
-    no_digits=False,
-    no_currency_symbols=False,
-    no_punct=False,
-    no_emoji=False,
+    remove_url=False,
+    remove_email=False,
+    remove_ph=False,
+    remove_nums=False,
+    remove_digits=False,
+    remove_currency=False,
+    remove_punct=False,
+    remove_emoji=False,
     replace_with_url="<URL>",
     replace_with_email="<EMAIL>",
     replace_with_phone_number="<PHONE>",
@@ -162,36 +158,36 @@ def clean(
 
     text = str(text)
 
-    if fix_unicode:
+    if unicode:
         text = fix_bad_unicode(text)
-    if no_currency_symbols:
+    if remove_currency:
         text = replace_currency_symbols(text, replace_with_currency_symbol)
     if to_ascii:
-        text = to_ascii_unicode(text, lang=lang, no_emoji=no_emoji)
-    if no_urls:
+        text = to_ascii_unicode(text, lang=lang, remove_emoji=remove_emoji)
+    if remove_url:
         text = replace_urls(text, replace_with_url)
-    if no_emails:
+    if remove_email:
         text = replace_emails(text, replace_with_email)
-    if no_phone_numbers:
+    if remove_ph:
         text = replace_phone_numbers(text, replace_with_phone_number)
-    if no_numbers:
+    if remove_nums:
         text = replace_numbers(text, replace_with_number)
-    if no_digits:
+    if remove_digits:
         text = replace_digits(text, replace_with_digit)
-    if no_punct:
+    if remove_punct:
         if replace_with_punct == "":
             text = remove_punct(text)
         else:
             text = replace_punct(text, replace_with_punct)
 
-    if no_emoji and not to_ascii:
+    if remove_emoji and not to_ascii:
         text = remove_emoji(text)
 
-    if lower:
-        text = text.lower()
+    if to_lower:
+        text = text.to_lower()
 
-    if normalize_whitespace:
-        text = _normalize_whitespace(
+    if remove_whitespace:
+        text = _remove_whitespace(
             text, no_line_breaks, strip_lines, keep_two_line_breaks
         )
 

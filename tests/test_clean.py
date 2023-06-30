@@ -1,10 +1,10 @@
 import phi
 
-def test_normalize_whitespace():
+def test_remove_whitespace():
     text = "Hello, world!  Hello...\t \tworld?\n\nHello:\r\n\n\nWorld. "
     proc_text = "Hello, world! Hello... world?\nHello:\nWorld."
-    assert phi.normalize_whitespace(text, no_line_breaks=False) == proc_text
-    assert phi.normalize_whitespace(" dd\nd  ", no_line_breaks=True) == "dd d"
+    assert phi.remove_whitespace(text, no_line_breaks=False) == proc_text
+    assert phi.remove_whitespace(" dd\nd  ", no_line_breaks=True) == "dd d"
 
 
 def test_replace_urls():
@@ -108,7 +108,7 @@ def test_remove_punct():
 def test_replace_punct():
     text = "I can't. No, I won't!"
     proc_text = "i can t no i won t"
-    assert phi.clean(text, no_punct=True, replace_with_punct=" ") == proc_text
+    assert phi.clean(text, remove_punct=True, replace_with_punct=" ") == proc_text
 
 
 def test_replace_currency_symbols():
@@ -161,14 +161,14 @@ def test_to_ascii():
 
 
 def test_whitespace():
-    assert phi.clean(" peter", normalize_whitespace=False) == " peter"
-    assert phi.clean(" peter", normalize_whitespace=True) == "peter"
+    assert phi.clean(" peter", remove_whitespace=False) == " peter"
+    assert phi.clean(" peter", remove_whitespace=True) == "peter"
     assert (
-        phi.clean(" pet\n\ner", normalize_whitespace=True, no_line_breaks=True)
+        phi.clean(" pet\n\ner", remove_whitespace=True, no_line_breaks=True)
         == "pet er"
     )
     assert (
-        phi.clean(" pet\n\ner", normalize_whitespace=True, no_line_breaks=False)
+        phi.clean(" pet\n\ner", remove_whitespace=True, no_line_breaks=False)
         == "pet\ner"
     )
 
@@ -184,14 +184,14 @@ def test_keep_emojis():
 
 def test_remove_emojis():
     assert (
-        phi.clean(emoji_line, no_emoji=True)
+        phi.clean(emoji_line, remove_emoji=True)
         == "me, se ds hello emoji hello how are you today"
     )
 
 
 def test_remove_emojis_no_ascii():
     assert (
-        phi.clean("😊 you today🙅🏽🙅🏽", to_ascii=False, no_emoji=True) == "you today"
+        phi.clean("😊 you today🙅🏽🙅🏽", to_ascii=False, remove_emoji=True) == "you today"
     )
 
 
@@ -237,7 +237,7 @@ Johannes dfdfd"""
     print(
         phi.clean(
             text_input,
-            lower=False,
+            to_lower=False,
             lang="de",
             no_line_breaks=False,
             keep_two_line_breaks=True,
@@ -246,7 +246,7 @@ Johannes dfdfd"""
 
     assert text_output == phi.clean(
         text_input,
-        lower=False,
+        to_lower=False,
         lang="de",
         no_line_breaks=False,
         keep_two_line_breaks=True,
@@ -273,7 +273,7 @@ Mit freundlichen Grüßen"""
     print(
         phi.clean(
             text_input,
-            lower=False,
+            to_lower=False,
             lang="de",
             no_line_breaks=False,
             keep_two_line_breaks=True,
@@ -282,7 +282,7 @@ Mit freundlichen Grüßen"""
 
     assert text_output == phi.clean(
         text_input,
-        lower=False,
+        to_lower=False,
         lang="de",
         no_line_breaks=False,
         keep_two_line_breaks=True,

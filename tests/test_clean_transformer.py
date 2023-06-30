@@ -21,9 +21,9 @@ try:
         assert len(transformer.transform(["sample1", "sample2", "sample3"])) == 3
 
     def test_set_params():
-        transformer.set_params(no_line_breaks=True, no_digits=True)
+        transformer.set_params(no_line_breaks=True, remove_digits=True)
         assert transformer.get_params()["no_line_breaks"]
-        assert transformer.get_params()["no_digits"]
+        assert transformer.get_params()["remove_digits"]
 
 except ImportError:
     pass

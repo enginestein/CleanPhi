@@ -6,17 +6,17 @@ CleanPhi is a powerful Python framework designed to enhance text processing by e
 from CleanPhi import clean
 
 clean("some input",
-    fix_unicode=True,               # fix various unicode errors
+    unicode=True,               # fix various unicode errors
     to_ascii=True,                  # transliterate to closest ASCII representation
-    lower=True,                     # lowercase text
+    to_lower=True,                     # to_lowercase text
     no_line_breaks=False,           # fully strip line breaks as opposed to only normalizing them
-    no_urls=False,                  # replace all URLs with a special token
-    no_emails=False,                # replace all email addresses with a special token
-    no_phone_numbers=False,         # replace all phone numbers with a special token
-    no_numbers=False,               # replace all numbers with a special token
-    no_digits=False,                # replace all digits with a special token
-    no_currency_symbols=False,      # replace all currency symbols with a special token
-    no_punct=False,                 # remove punctuations
+    remove_url=False,                  # replace all URLs with a special token
+    remove_email=False,                # replace all email addresses with a special token
+    remove_ph=False,         # replace all phone numbers with a special token
+    remove_nums=False,               # replace all numbers with a special token
+    remove_digits=False,                # replace all digits with a special token
+    remove_currency=False,      # replace all currency symbols with a special token
+    remove_punct=False,                 # remove punctuations
     replace_with_punct="",          # instead of removing punctuations you may replace them
     replace_with_url="<URL>",
     replace_with_email="<EMAIL>",
@@ -34,8 +34,8 @@ Choose an arguement and use the **clean** function in your code:
 import CleanPhi
 text = "Hello, world!  Hello...\t \tworld?\n\nHello:\r\n\n\nWorld. "
 proc_text = "Hello, world! Hello... world?\nHello:\nWorld."
-assert CleanPhi.normalize_whitespace(text, no_line_breaks=False) == proc_text
-assert CleanPhi.normalize_whitespace(" dd\nd  ", no_line_breaks=True) == "dd d"
+assert CleanPhi.remove_whitespace(text, no_line_breaks=False) == proc_text
+assert CleanPhi.remove_whitespace(" dd\nd  ", no_line_breaks=True) == "dd d"
 ```
 
 ### To install CleanPhi in >=Python3.6
@@ -49,6 +49,10 @@ pip install CleanPhi
 ```python
 from CleanPhi.scikit import PhiTransformer
 
-cleaner = PhiTransformer(no_punct=False, lower=False)
+cleaner = PhiTransformer(remove_punct=False, to_lower=False)
 cleaner.transform(['Clean text.', 'Natural language processing!'])
 ```
+
+# Version 0.2.0 
+
+- Bugs fixed
