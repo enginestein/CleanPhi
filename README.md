@@ -1,5 +1,7 @@
 # CleanPhi
 
+[![Downloads](https://static.pepy.tech/badge/cleanphi)](https://pepy.tech/project/cleanphi)
+
 CleanPhi is a powerful Python framework designed to enhance text processing by effectively removing unwanted elements such as extraneous characters and unicodes. Leveraging the capabilities of natural language processing, CleanPhi provides a comprehensive set of functionalities, making it an invaluable tool for text cleaning and related tasks.
 
 ```python
